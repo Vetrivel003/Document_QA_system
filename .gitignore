@@ -1,0 +1,33 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+
+# Environment
+.env
+.venv/
+venv/
+
+
+# Data
+data/uploads/*
+data/processed/*
+data/chroma_db/
+!data/uploads/.gitkeep
+!data/processed/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Streamlit
+.streamlit/secrets.toml
