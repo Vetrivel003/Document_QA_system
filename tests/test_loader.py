@@ -50,7 +50,7 @@ def test_loader():
         print(f"      Preview: {preview}...")
 
     print("\n" + "=" * 60)
-    print("✅ ALL TESTS PASSED!")
+    print("ALL TESTS PASSED!")
     print("=" * 60)
 
 if __name__ == "__main__":

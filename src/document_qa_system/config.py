@@ -12,26 +12,21 @@ class Config:
     UPLOAD_DIR = DATA_DIR / "uploads"
     PROCESSED_DIR = DATA_DIR / "processed"
 
-    #API Keys
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY","")
 
-     # Model Configuration
     GROQ_MODEL: str = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
     EMBEDDING_MODEL: str = os.getenv(
         "EMBEDDING_MODEL", 
         "sentence-transformers/all-MiniLM-L6-v2"
     )
 
-    # Vector Store
     CHROMA_PERSIST_DIR: Path = Path(
         os.getenv("CHROMA_PERSIST_DIR", "./data/chroma_db")
     )
 
-    # Document Processing
     CHUNK_SIZE: int = 1000
     CHUNK_OVERLAP: int = 200
 
-    # Supported file formats
     SUPPORTED_FORMATS = {'.pdf', '.txt', '.docx'}
     MAX_FILE_SIZE_MB = 50
 
@@ -52,4 +47,5 @@ class Config:
         print(f"Using model: {cls.GROQ_MODEL}")
         print(f"Using embeddings: {cls.EMBEDDING_MODEL}")
 
-Config.validate()
+if __name__ == "__main__":
+    Config.validate()

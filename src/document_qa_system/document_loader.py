@@ -11,7 +11,7 @@ from langchain_community.document_loaders import(
 
 from langchain_core.documents import Document
 
-from src.document_qa_system.config import Config
+from document_qa_system.config import Config
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -154,3 +154,14 @@ class DocumentLoader:
             })
 
         return documents
+    
+def load_documents(path: str | Path) -> Dict[str, List[Document]] | List[Document]:
+    loader = DocumentLoader()
+    path = Path(path)
+    
+    if path.is_file():
+        return loader.load_document(path)
+    elif path.is_dir():
+        return loader.load_directory(path)
+    else:
+        raise ValueError(f"Invalid path: {path}")
