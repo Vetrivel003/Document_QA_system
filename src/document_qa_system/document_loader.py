@@ -22,19 +22,6 @@ class DocumentLoader:
         self.max_file_size = Config.MAX_FILE_SIZE_MB * 1024 * 1024
     
     def load_document(self,file_path : str | Path) -> List[Document]:
-        """
-        Load a single document with automatic format detection.
-        
-        Args:
-            file_path: Path to the document
-            
-        Returns:
-            List of Document objects (some loaders split into pages)
-            
-        Raises:
-            ValueError: If file format not supported or validation fails
-            FileNotFoundError: If file doesn't exist
-        """
         file_path = Path(file_path)
 
         # Validation
@@ -66,15 +53,6 @@ class DocumentLoader:
             raise
 
     def load_directory(self,directory_path : str | Path) -> Dict[str,List[Document]]:
-        """
-        Load all supported documents from a directory.
-        
-        Args:
-            directory_path: Path to directory containing documents
-            
-        Returns:
-            Dictionary mapping filename to list of Documents
-        """
         directory_path = Path(directory_path)
 
         if not directory_path.is_dir():
