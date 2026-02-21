@@ -24,10 +24,8 @@ class DocumentLoader:
     def load_document(self,file_path : str | Path) -> List[Document]:
         file_path = Path(file_path)
 
-        # Validation
         self._validate_file(file_path)
 
-        #Load based on File Types
         suffix = file_path.suffix.lower()
 
         try:

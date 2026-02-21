@@ -8,25 +8,12 @@ from document_qa_system.config import Config
 logger = logging.getLogger(__name__)
 
 class TextProcessor:
-    """
-    Process documents into optimally-sized chunks for retrieval.
-    
-    WHY: Chunking affects retrieval quality more than almost anything else.
-    Good chunks = relevant answers. Bad chunks = garbage results.
-    """
-
     def __init__(
             self,
             chunk_size : int = Config.CHUNK_SIZE,
             chunk_overlap : int = Config.CHUNK_OVERLAP,
             separators: Optional[List[str]] = None
     ):
-        """
-        Args:
-            chunk_size: Target size for each chunk (characters)
-            chunk_overlap: Overlap between chunks to preserve context
-            separators: List of separators to try, in order of preference
-        """
 
         self.chunk_size = chunk_size
 
@@ -57,17 +44,6 @@ class TextProcessor:
             documents : list[Document],
             add_chunk_metadata : bool = True
     ) -> List[Document]:
-         
-         """
-        Split documents into chunks with enhanced metadata.
-        
-        Args:
-            documents: List of documents to process
-            add_chunk_metadata: Whether to add chunk-specific metadata
-            
-        Returns:
-            List of chunked documents with metadata
-        """
          if not documents:
              logger.warning("No documents provided for processing")
              return []
@@ -93,23 +69,9 @@ class TextProcessor:
         document: Document,
         add_chunk_metadata: bool = True
     ) -> List[Document]:
-        """
-        Process a single document into chunks.
-        
-        Convenience method for processing one document at a time.
-        """
         return self.process_documents([document], add_chunk_metadata)
     
     def _enhance_chunk_metadata(self,chunks:List[Document]) -> List[Document]:
-        """
-        Add chunk-specific metadata for better tracking and retrieval.
-        
-        WHY: This metadata helps with:
-        - Debugging (see which chunk came from where)
-        - Source citations (show page/section in answers)
-        - Quality analysis (find problematic chunks)
-        """
-
         for id,chunk in enumerate(chunks):
             chunk.metadata['chunk_id'] = id
             chunk.metadata['chunk_size'] = len(chunk.page_content)
